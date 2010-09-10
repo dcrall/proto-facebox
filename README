@@ -1,16 +1,70 @@
-1. include the facebox.js and facebox.css
-2. move the images folder to www.you-domain/images
-3. new features:
-	* can resize the window and the lightbox will always stay centered.
-	* light box automaticly figures out where center is.
-4. to use:
-URL: <a href="http://url" rel='facebox'>MyLink</a>
-Image: <a href="/images/myimage.png" rel='facebox'>MyImage</a>
-Content on the page: <a href="#mydiv" rel="facebox">Mydiv</a>
+/*  Proto-Facebox version 1.2
+ *  By Dennis Crall, http://github.com/dcrall
+ *  @requires Prototype 1.6 & script.aculo.us 1.8
 
-
-an example rails_helper
-
-def facebox_link(name, url)
-  link_to(name, url, :rel => "facebox")
-end
+ *  Inspired by the original, Facebox by Chris Wanstrath - http://famspam.com/facebox
+ *  First ported to Prototype by Phil Burrows - http://blog.philburrows.com
+ *  Forked from Scott Davis http://github.com/jetviper21/prototype-facebox
+ *  Additional forks at: http://github.com/robertgaal/facebox-for-prototype
+ *
+ *  Why another Facebox for Prototype?
+ *    - Better feature parity with Facebox (for JQuery) v1.2
+ *    - Written in idiomatic Prototype for better readability
+ *
+ *  Licensed under the MIT:
+ *  http://www.opensource.org/licenses/mit-license.php
+ *
+ *  Usage:
+ *   
+ *  var facebox;
+ *  document.observe('dom:loaded', function(e) {
+ *  	facebox = new Facebox();		
+ *	});
+ *
+ *  Customize settings by passing in a configuration object:
+ *
+ *  facebox = new Facebox({
+ *      click_away: true,
+ *      opacity: .5
+ *  });		
+ *
+ *  Attach to mark-up unobtrusively using rel="facebook"
+ *
+ *  <a href="#terms" rel="facebox">Terms</a>
+ *    Loads the #terms div in the box
+ *
+ *  <a href="terms.html" rel="facebox">Terms</a>
+ *    Loads the terms.html page in the box
+ *
+ *  <a href="terms.png" rel="facebox">Terms</a>
+ *    Loads the terms.png image in the box
+ *
+ *  <a href="#terms" rel="facebox.style-hook">Terms</a>
+ *    Add class "style-hook" to $('facebook_content')
+ *
+ *  Use the display() method programmatically:
+ *
+ *    facebox.display({div: '#terms'})
+ *    facebox.display({image: 'terms.gif'})
+ *    facebox.display({ajax: 'terms.html'})
+ *    facebox.display('some html', 'my-groovy-style')
+ *
+ *  Custom Events
+ *    facebox:close			Close the facebox pop-up  
+ *    facebox:init			Called as Facebox starts its initialize method  
+ *    facebox:loading		Called as the loading sequence starts  
+ *    facebox:beforeReveal	Called before content is revealed  
+ *    facebox:reveal		Called after content is revealed  
+ *    facebox:afterReveal	Alias for facebox:reveal
+ *
+ *  Trigger custom event: 
+ *
+ *    $('facebox').fire('facebox:loading');
+ *
+ *  Observe custom event:
+ *
+ *    document.observe('facebox:loading', function(e) {
+ *	      console.log("Loading Facebox.");
+ *    });
+ * 
+ */
