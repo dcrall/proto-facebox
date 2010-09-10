@@ -1,0 +1,16 @@
+1. include the facebox.js and facebox.css
+2. move the images folder to www.you-domain/images
+3. new features:
+	* can resize the window and the lightbox will always stay centered.
+	* light box automaticly figures out where center is.
+4. to use:
+URL: <a href="http://url" rel='facebox'>MyLink</a>
+Image: <a href="/images/myimage.png" rel='facebox'>MyImage</a>
+Content on the page: <a href="#mydiv" rel="facebox">Mydiv</a>
+
+
+an example rails_helper
+
+def facebox_link(name, url)
+  link_to(name, url, :rel => "facebox")
+end

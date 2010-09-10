@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Facebox Test</title>
+	<script src="./prototype/prototype.js" type="text/javascript"></script>
+	<script src="./prototype/scriptaculous.js" type="text/javascript"></script>
+	<!-- <script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script> -->
+	<link href="./facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>
+	<script src="./facebox/facebox.js" type="text/javascript"></script>
+	
+	<script>
+		var facebox;
+		document.observe('dom:loaded', function(e){
+			facebox = new Facebox({
+				loading_image: './facebox/images/loading.gif',
+				close_image		: './facebox/images/closelabel.gif',				
+				click_away: false,
+				v_margin_divisor: 10
+			});
+		});
+	
+		document.observe('dom:loaded', function(e) {
+			document.observe('facebox:init', function(e) {
+				console.log("Facebox init.");
+			});
+			
+			document.observe('facebox:loading', function(e) {
+				console.log("Loading Facebox.");
+			});
+			
+			document.observe('facebox:beforeReveal', function(e) {
+				console.log("Facebox before reveal");
+			});
+			
+			document.observe('facebox:afterReveal', function(e) {
+				console.log("Facebox after reveal");
+			});
+			
+			document.observe('facebox:reveal', function(e) {
+				console.log("Facebox reveal");
+			});
+			
+		});
+	</script>
+</head>
+
+<body>
+
+	<h1>Hello Facebox</h1>
+	
+	<div id="content">
+
+	<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+		
+		<p>Display <a href="#extra" rel="facebox.maui">text from a div</a> inside of a facebox.</p>
+		
+		<p>Display <a href="./images/monterey-whale.jpg" rel="facebox">an image</a> in a facebox.</p>
+		
+		<p>Display <a href="./images/pizza-1024.jpg" rel="facebox">a big image</a> in a facebox.</p>
+		
+		<p>Display <a href="./images/pizza-400.jpg" rel="facebox">a small image</a> in a facebox.</p>
+		
+		
+		<p>Display <a href="remote.html" rel="facebox">the results of an AJAX call</a> inside a facebox.</p>
+	</div>
+	
+	<div id="extra" style="display:none">
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+	</div>
+
+</body>
+</html>
