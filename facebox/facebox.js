@@ -212,7 +212,7 @@ var Facebox = Class.create({
 	},
 		
 	loading: function() {
-		if($('facebox_loading')) return true;
+		if($('facebox_loading') && $('facebox').visible()) return true;
 		
 		$('facebox').fire('facebox:loading');
 		this.showOverlay();
@@ -221,34 +221,36 @@ var Facebox = Class.create({
 			'<div id="facebox_loading" class="loading"><img src="#{img}"/></div>'
 		);
 		
-		$('facebox_content').childElements().invoke('remove');
-		$('facebox_content').insert({bottom: loading_template.evaluate({
-			img: this.settings.loading_image})
-		});
-
+		$('facebox_content').update(loading_template.evaluate({
+			img: this.settings.loading_image
+		}));
+		
 		this.setLocation();
+		this.open();		
 	},
 	
 	reveal: function(data, klass){
 		this.loading();
 		$('facebox').fire('facebox:beforeReveal');
-		
-		if(!$('facebox').visible()) this.open();		
-		
+				
 		var faceboxContent = $('facebox_content');
 		if (klass) faceboxContent.addClassName(klass);
 		faceboxContent.update(data);
-		
+				
 		$$('#facebox .loading').invoke('remove');
 		$('facebox_content').childElements().invoke('show');
+		
 		this.setLocation();
-			
+		this.open();		
+					
 		$('facebox').fire('facebox:reveal');
 		$('facebox').fire('facebox:afterReveal');
 	},
 	
 	open: function(){
-		$('facebox').appear({duration: this.settings.fade_duration});
+		if(!$('facebox').visible()) {
+			$('facebox').appear({duration: this.settings.fade_duration});
+		}
 	},
 	
 	close: function(){
@@ -260,7 +262,7 @@ var Facebox = Class.create({
 		var pageScroll = document.viewport.getScrollOffsets();
 		var vertical_margin = pageScroll.top + (document.viewport.getHeight()/ this.settings.v_margin_divisor);
 		var left_offset = (document.viewport.getWidth()/2) - ($('facebox').getWidth()/2);
-			
+		
 		$('facebox').setStyle({
 			'top': vertical_margin + 'px',
 			'left': left_offset + 'px'
@@ -309,11 +311,3 @@ var Facebox = Class.create({
 		return img;
 	} 
 });
-
-// var facebox;
-// document.observe('dom:loaded', function(e){
-// 	facebox = new Facebox({
-// 		click_away: false,
-// 		v_margin_divisor: 10
-// 	});
-// });
