@@ -28,7 +28,7 @@
  *      opacity: .5
  *  });		
  *
- *  Attach to mark-up unobtrusively using rel="facebook"
+ *  Attach to mark-up unobtrusively using rel="facebox"
  *
  *  <a href="#terms" rel="facebox">Terms</a>
  *    Loads the #terms div in the box
@@ -40,7 +40,7 @@
  *    Loads the terms.png image in the box
  *
  *  <a href="#terms" rel="facebox.style-hook">Terms</a>
- *    Add class "style-hook" to $('facebook_content')
+ *    Add class "style-hook" to $('facebox_content')
  *
  *  Use the display() method programmatically:
  *
@@ -199,6 +199,9 @@ var Facebox = Class.create({
 	},
 	
 	fillFaceboxFromAjax: function(url, klass){
+		
+		var fb = this;
+		
 		new Ajax.Request(url, {
 			method		: 'get',
 			onFailure	: function(transport){
@@ -207,6 +210,9 @@ var Facebox = Class.create({
 			}.bind(this),
 			onSuccess	: function(transport){
 				this.reveal(transport.responseText, klass);
+				$$('div#facebox a[rel*=facebox]').invoke('observe', 'click', function(e) {
+					this.triggerFacebox(e)
+				}.bindAsEventListener(fb));				
 			}.bind(this)
 		});
 	},
@@ -272,7 +278,7 @@ var Facebox = Class.create({
 	showOverlay: function() {
 		if(this.skipOverlay()) return;
 		
-		if(!$('facebook_overlay')) {
+		if(!$('facebox_overlay')) {
 			var overlay_html = '<div id="facebox_overlay" class="facebox_hide"></div>' 
 			$$('body').first().insert({bottom: overlay_html});
 			$('facebox_overlay').addClassName('facebox_overlayBG')
