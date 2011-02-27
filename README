@@ -28,7 +28,7 @@
  *      opacity: .5
  *  });		
  *
- *  Attach to mark-up unobtrusively using rel="facebook"
+ *  Attach to mark-up unobtrusively using rel="facebox"
  *
  *  <a href="#terms" rel="facebox">Terms</a>
  *    Loads the #terms div in the box
@@ -40,7 +40,7 @@
  *    Loads the terms.png image in the box
  *
  *  <a href="#terms" rel="facebox.style-hook">Terms</a>
- *    Add class "style-hook" to $('facebook_content')
+ *    Add class "style-hook" to $('facebox_content')
  *
  *  Use the display() method programmatically:
  *
