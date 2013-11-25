@@ -127,7 +127,7 @@ var Facebox = Class.create({
 		this.preloadImage(this.settings.loading_image);
 		
 		$('facebox').select('.b:first-of-type, .bl').each(function(elem) {			
-			var img_url = elem.getStyle('background-image').replace(/url\("(.+)"\)/, '$1');
+			var img_url = elem.getStyle('background-image').replace(/url\((.+)\)/, '$1');
 			this.preloadImage(img_url);
 		}.bind(this));
 		
