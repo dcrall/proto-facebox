@@ -128,6 +128,7 @@ var Facebox = Class.create({
 		
 		$('facebox').select('.b:first-of-type, .bl').each(function(elem) {			
 			var img_url = elem.getStyle('background-image').replace(/url\((.+)\)/, '$1');
+			img_url = img_url.replace('"', '').replace('"', '');
 			this.preloadImage(img_url);
 		}.bind(this));
 		
